@@ -5,7 +5,7 @@ PODCAST_URL = 'http://www.radio.rai.it/radio3/podcast/rssradio3.jsp?id=6079'
 require 'net/http'
 require 'rubygems'
 require 'xmlsimple'
-require 'Date'
+require 'date'
 require "fileutils"
  
 xml_data = Net::HTTP.get_response(URI.parse(PODCAST_URL)).body
@@ -16,7 +16,6 @@ data['channel'][0]['item'].each do |item|
     podcast = item['enclosure'][0]['url']
     title = item['title'][0]
     description = item['description'][0]
-    file = podcast.split("/").last
 
     if not title.include? " - "
         title += description.camelcase
